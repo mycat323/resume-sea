@@ -1,0 +1,64 @@
+name: Deploy static site to Pages
+
+# 本项目是预构建的纯静态站点：docs/<简历>/ 由本地 convert.py 生成并提交，
+# CI 不需要重新构建，只需把仓库中已有的静态文件发布到 GitHub Pages。
+#
+# 结构与同账号下已验证可用的 bili-knowledge/deploy.yml 保持一致
+# （两个 job、configure-pages → upload-pages-artifact → deploy-pages）。
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  # cancel-in-progress: true —— Pages 只认「最后一次成功的部署」，
+  # 若允许旧提交的部署后完成，会把线上站点回滚成旧内容。
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Stage static site
+        run: |
+          mkdir -p _site
+          for item in index.html favicon.ico .nojekyll assets template docs resumes; do
+            if [ -e "$item" ]; then
+              cp -r "$item" _site/
+            else
+              echo "::warning::$item 不存在，已跳过"
+            fi
+          done
+          echo "--- _site 内容 ---"
+          ls -A _site
+          echo "--- 体积 ---"
+          du -sh _site
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
