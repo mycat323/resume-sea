@@ -1,0 +1,5 @@
+# 本站点是预构建的纯静态站点，禁用 GitHub Pages 的 Jekyll 构建流程。
+#
+# 原因：仓库内 tools/templates/online-cv/ 带有 Jekyll 主题源文件
+# （_layouts / _includes / _sass），而发布目录 jjc/、testresume1/ 已是
+# Node 渲染好的静态产物。开启 Jekyll 既无必要，也可能干扰输出。

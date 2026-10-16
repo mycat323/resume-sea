@@ -17,6 +17,15 @@ def _time_range(start, end):
     return start or end or ""
 
 
+def _prune(d):
+    """删除值为空字符串/None 的键。
+
+    必须显式删除而不能留空串：LiquidJS 把 "" 判为真值，模板里的
+    {% if x %} 会因此渲染出 <a href=""> / href="//" 等无效锚点。
+    """
+    return {k: v for k, v in d.items() if v not in ("", None)}
+
+
 def to_online_cv(rsuf, skin="blue", sidebar_position="right"):
     basic = rsuf.get("basic", {})
     contacts = rsuf.get("contacts", {})
@@ -27,6 +36,11 @@ def to_online_cv(rsuf, skin="blue", sidebar_position="right"):
         "education": True,       # 教育经历放侧栏
         "name": basic.get("name", ""),
         "tagline": basic.get("headline", ""),
+        # 侧栏头像固定取 assets/images/profile.png：模板自带该默认头像，
+        # convert.py --avatar 也把用户头像覆盖写入同一路径。
+        # 这里必须显式赋值，否则 sidebar.html 的 {% if sidebar.avatar %} 恒为假，
+        # 用户提供的头像永远不会被渲染。
+        "avatar": "profile.png",
     }
     # 联系方式（模板按字段是否存在渲染）
     for key in ("email", "phone", "website", "github", "linkedin"):
@@ -73,28 +87,23 @@ def to_online_cv(rsuf, skin="blue", sidebar_position="right"):
     if certs:
         data["certifications"] = {
             "title": "证书与荣誉",
-            "list": [{
+            "list": [_prune({
                 "name": c.get("name", ""),
                 "start": c.get("date", ""),
-                "end": "",
                 "organization": c.get("org", ""),
-                "credentialid": "",
-                "credentialurl": "",
-                "credentialname": "",
                 "details": c.get("details", ""),
-            } for c in certs],
+            }) for c in certs],
         }
 
     projects = rsuf.get("projects") or []
     if projects:
         data["projects"] = {
             "title": "项目经历",
-            "intro": "",
-            "assignments": [{
+            "assignments": [_prune({
                 "title": p.get("name", ""),
                 "tagline": p.get("tagline", ""),
                 "link": p.get("link", ""),
-            } for p in projects],
+            }) for p in projects],
         }
 
     skills = rsuf.get("skills") or []

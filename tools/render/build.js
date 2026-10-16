@@ -51,7 +51,12 @@ if (fs.existsSync(configPath)) {
 const siteData = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
 
 const site = Object.assign({}, templateConfig, {
-  baseurl: '',                       // 发布在平台子路径下，页内资源用绝对路径 /assets/...
+  // baseurl 由 renderPage 按输出深度动态计算：
+  //   根级页面 -> '.'（./assets/...）
+  //   子目录页面 -> '..'（../assets/...）
+  // 这样本地预览（http://localhost:xxxx/<name>/）与 GitHub Pages
+  // 子路径部署（https://<user>.github.io/<repo>/<name>/）都能正确解析资源。
+  baseurl: '.',
   data: { data: siteData },
   theme_skin: args.skin || templateConfig.theme_skin || 'blue',
   analytics: args.analytics || null, // 默认关闭，防止继承模板作者的 GA ID
@@ -106,13 +111,16 @@ async function renderPage(file, outputs) {
   html = inlineIncludes(html);
   const pageCtx = Object.assign({}, front);
   delete pageCtx.layout;
-  const rendered = await engine.parseAndRender(html, { site, page: pageCtx });
   for (const out of outputs) {
+    // 按输出文件的目录深度计算相对前缀，保证子目录页面（如 print/）资源路径正确
+    const depth = out.split(/[\\/]/).length - 1;
+    site.baseurl = depth === 0 ? '.' : new Array(depth).fill('..').join('/');
+    const rendered = await engine.parseAndRender(html, { site, page: pageCtx });
     const dest = path.join(OUT, out);
     fs.mkdirSync(path.dirname(dest), { recursive: true });
     fs.writeFileSync(dest, rendered);
+    console.log('[page] ' + file + ' -> ' + out + ' (baseurl=' + site.baseurl + ', ' + rendered.length + ' bytes)');
   }
-  console.log('[page] ' + file + ' -> ' + outputs.join(', ') + ' (' + rendered.length + ' bytes)');
 }
 
 // ---------- SCSS：先渲染 Liquid（动态皮肤）再编译 ----------
@@ -120,6 +128,7 @@ function buildCss() {
   const scssPath = path.join(ROOT, 'assets', 'css', 'main.scss');
   let raw = fs.readFileSync(scssPath, 'utf8');
   raw = raw.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n/, '');
+  site.baseurl = '.'; // SCSS 内不引用 baseurl，置回默认值避免污染
   const liquidRendered = engine.parseAndRenderSync(raw, { site });
   const result = sass.compileString(liquidRendered, {
     loadPaths: [path.join(ROOT, '_sass'), path.join(ROOT, 'assets', 'css')],
@@ -161,7 +170,7 @@ function copyAssets() {
 (async () => {
   fs.rmSync(OUT, { recursive: true, force: true });
   await renderPage('index.html', ['index.html']);
-  await renderPage('print.html', ['print.html', path.join('print', 'index.html')]);
+  await renderPage('print.html', [path.join('print', 'index.html')]);
   buildCss();
   copyAssets();
   console.log('渲染完成 -> ' + OUT);

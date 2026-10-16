@@ -97,6 +97,9 @@ def save_registry(reg):
 
 def update_registry(name, template, skin, source, confidence):
     reg = load_registry()
+    # 去掉 base_url 末尾斜杠后拼接，不能用 .replace("//", "/")：
+    # 那会把 scheme 的 "https://" 一并破坏成 "https:/"。
+    base_url = (reg.get("base_url") or "").rstrip("/")
     entry = {
         "id": name,
         "title": "",
@@ -105,7 +108,7 @@ def update_registry(name, template, skin, source, confidence):
         "source": os.path.basename(source) if source else "",
         "confidence": confidence,
         "published_at": __import__("datetime").date.today().isoformat(),
-        "url": f"{reg.get('base_url', '')}/{name}".replace("//", "/"),
+        "url": f"{base_url}/{name}",
     }
     # title 从 RSUF 读取（调用方传入的 name 之前已落盘）
     rsuf_path = os.path.join(RESUMES_DIR, f"{name}.rsuf.json")
