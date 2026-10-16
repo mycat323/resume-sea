@@ -1,0 +1,111 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RSUF - 简历海统一简历格式 (Resume Sea Unified Format)",
+  "description": "简历海平台的中间交换格式：任何来源（PDF/Word/手工填写）的简历都会被规范化为本格式，再由模板适配层转换为具体模板的数据结构。字段均可为空或缺失，抽取器会标注置信度。",
+  "type": "object",
+  "required": ["schema_version", "basic"],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "basic": {
+      "type": "object",
+      "properties": {
+        "name":        { "type": "string", "description": "姓名" },
+        "headline":    { "type": "string", "description": "职位头衔/一句话定位" },
+        "location":    { "type": "string", "description": "所在城市" },
+        "summary":     { "type": "string", "description": "个人简介/自我评价" }
+      }
+    },
+    "contacts": {
+      "type": "object",
+      "properties": {
+        "email":   { "type": "string" },
+        "phone":   { "type": "string" },
+        "wechat":  { "type": "string" },
+        "website": { "type": "string" },
+        "github":  { "type": "string" },
+        "linkedin":{ "type": "string" }
+      }
+    },
+    "education": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "school":  { "type": "string" },
+          "degree":  { "type": "string" },
+          "start":   { "type": "string" },
+          "end":     { "type": "string" },
+          "details": { "type": "string" }
+        }
+      }
+    },
+    "experience": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "company": { "type": "string" },
+          "role":    { "type": "string" },
+          "start":   { "type": "string" },
+          "end":     { "type": "string" },
+          "details": { "type": "string" }
+        }
+      }
+    },
+    "projects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name":    { "type": "string" },
+          "tagline": { "type": "string" },
+          "link":    { "type": "string" },
+          "start":   { "type": "string" },
+          "end":     { "type": "string" },
+          "details": { "type": "string" }
+        }
+      }
+    },
+    "skills": {
+      "type": "array",
+      "description": "技能列表；level 为 0-100 的熟练度估计值，无法判断时默认 75",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name":  { "type": "string" },
+          "level": { "type": "integer", "minimum": 0, "maximum": 100 }
+        }
+      }
+    },
+    "certifications": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name":  { "type": "string" },
+          "org":   { "type": "string" },
+          "date":  { "type": "string" },
+          "details": { "type": "string" }
+        }
+      }
+    },
+    "languages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name":  { "type": "string" },
+          "level": { "type": "string" }
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "properties": {
+        "source_file":  { "type": "string" },
+        "extracted_at": { "type": "string" },
+        "confidence":   { "type": "number", "description": "0-1，抽取结果整体置信度" }
+      }
+    }
+  }
+}

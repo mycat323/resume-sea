@@ -1,0 +1,164 @@
+{
+  "schema_version": "1.0",
+  "basic": {
+    "name": "陈雨桐",
+    "headline": "前端开发工程师",
+    "summary": "3 年前端开发经验，专注 Vue/React 生态与前端工程化。主导过多个从 0 到 1 的中后台项目，擅长性能优化与组件体系建设，有跨端（Web/小程序）与 Node.js 全栈实践。"
+  },
+  "contacts": {
+    "email": "chenyutong.dev@example.com",
+    "phone": "13800138000",
+    "github": "cytong",
+    "website": "https://chenyutong.dev"
+  },
+  "education": [
+    {
+      "school": "同济大学",
+      "degree": "本科 · 计算机科学与技术",
+      "start": "2016.09",
+      "end": "2020.06",
+      "details": "GPA 3.6/4.0；主修课程：数据结构、操作系统、计算机网络、数据库原理；校级优秀学生奖学金 ×2"
+    }
+  ],
+  "experience": [
+    {
+      "company": "字节跳动",
+      "role": "高级前端开发工程师",
+      "start": "2022.03",
+      "end": "至今",
+      "details": "主导抖音电商商家后台性能优化，首屏加载时间从 3.2s 降至 1.1s（LCP）\n搭建基于 Arco Design 的二次封装组件库，覆盖 12 条业务线、复用率 78%\n推动团队前端工程化升级：Vite 迁移、Monorepo 改造、CI 流水线标准化"
+    },
+    {
+      "company": "美团",
+      "role": "前端开发工程师",
+      "start": "2020.07",
+      "end": "2022.02",
+      "details": "负责美团外卖商家端 H5 活动页与营销工具开发，日均 PV 300 万+\n设计活动页可视化搭建 Schema，运营自助配置活动占比从 15% 提升至 60%"
+    }
+  ],
+  "projects": [
+    {
+      "name": "简历海 resume-sea",
+      "tagline": "统一的简历发布平台，支持 PDF/Word 简历一键转换发布",
+      "link": "",
+      "start": null,
+      "end": null,
+      "details": "设计 RSUF 统一简历数据格式与模板适配层，解析准确率约 85%\n基于 Jekyll 主题生态实现多模板渲染，发布即得独立 URL"
+    },
+    {
+      "name": "个人博客系统",
+      "tagline": "基于 Next.js + MDX 的技术博客，月活 2 万+",
+      "link": "",
+      "start": null,
+      "end": null,
+      "details": "实现静态生成 + ISR，Lighthouse 性能分 98\n自研评论与订阅系统，接入 GitHub OAuth"
+    }
+  ],
+  "skills": [
+    {
+      "name": "Vue3",
+      "level": 95
+    },
+    {
+      "name": "TypeScript",
+      "level": 95
+    },
+    {
+      "name": "JavaScript",
+      "level": 95
+    },
+    {
+      "name": "HTML5",
+      "level": 95
+    },
+    {
+      "name": "CSS3",
+      "level": 95
+    },
+    {
+      "name": "React",
+      "level": 85
+    },
+    {
+      "name": "Node.js",
+      "level": 85
+    },
+    {
+      "name": "Vite",
+      "level": 85
+    },
+    {
+      "name": "Webpack",
+      "level": 85
+    },
+    {
+      "name": "Sass",
+      "level": 85
+    },
+    {
+      "name": "小程序开发",
+      "level": 75
+    },
+    {
+      "name": "Vitest",
+      "level": 75
+    },
+    {
+      "name": "单元测试",
+      "level": 75
+    },
+    {
+      "name": "Docker",
+      "level": 75
+    },
+    {
+      "name": "Python",
+      "level": 60
+    },
+    {
+      "name": "Nginx",
+      "level": 60
+    },
+    {
+      "name": "基础",
+      "level": 60
+    },
+    {
+      "name": "CI",
+      "level": 60
+    },
+    {
+      "name": "CD",
+      "level": 60
+    }
+  ],
+  "certifications": [
+    {
+      "name": "AWS Certified Cloud Practitioner",
+      "org": "Amazon",
+      "date": "2023.05",
+      "details": ""
+    },
+    {
+      "name": "同济大学优秀毕业生",
+      "org": "同济大学",
+      "date": "2020.06",
+      "details": ""
+    }
+  ],
+  "languages": [
+    {
+      "name": "中文",
+      "level": "母语"
+    },
+    {
+      "name": "英语",
+      "level": "CET-6"
+    }
+  ],
+  "meta": {
+    "source_file": "sample-resume.docx",
+    "extracted_at": "2026-10-16T11:57:46",
+    "confidence": 1.0
+  }
+}

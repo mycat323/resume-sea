@@ -1,0 +1,9 @@
+# 本地构建产物（勿提交）
+tools/.build/
+tools/__pycache__/
+tools/adapters/__pycache__/
+tools/render/node_modules/
+tools/node_modules/
+__pycache__/
+*.pyc
+.DS_Store

@@ -1,0 +1,26 @@
+{
+  "platform": "简历海 resume-sea",
+  "base_url": "https://mycat323.github.io/resume-sea",
+  "resumes": [
+    {
+      "id": "testresume1",
+      "title": "陈雨桐的简历",
+      "template": "online-cv",
+      "skin": "blue",
+      "source": "",
+      "confidence": 1.0,
+      "published_at": "2026-10-16",
+      "url": "https:/mycat323.github.io/resume-sea/testresume1"
+    },
+    {
+      "id": "jjc",
+      "title": "蒋以宸的简历",
+      "template": "online-cv",
+      "skin": "blue",
+      "source": "蒋以宸简历.pdf",
+      "confidence": 0.6,
+      "published_at": "2026-10-16",
+      "url": "https:/mycat323.github.io/resume-sea/jjc"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "platform": "简历海 resume-sea",
+  "updated": "2026-10-16",
+  "templates": [
+    {
+      "id": "online-cv",
+      "name": "Orbit · 经典侧栏",
+      "source": "sharu725/online-cv",
+      "description": "最主流的 Jekyll 简历主题。内容全部集中在 data.yml 单一数据源，结构字段化程度最高，与简历解析结果的映射最直接；自带 /print 打印页与前端 PDF 导出。",
+      "features": ["单一数据源", "8 种配色皮肤", "打印/PDF 友好", "字段化结构"],
+      "skins": [
+        { "id": "blue",       "name": "深海蓝",   "color": "#42A8C0", "preview": "assets/skins/blue.jpg" },
+        { "id": "turquoise",  "name": "碧波绿",   "color": "#4CAC9D", "preview": "assets/skins/turquoise.jpg" },
+        { "id": "teal",       "name": "蓝绿色",   "color": "#4BA3A6", "preview": null },
+        { "id": "green",      "name": "青草绿",   "color": "#5BB66F", "preview": "assets/skins/green.jpg" },
+        { "id": "berry",      "name": "莓果紫",   "color": "#A15277", "preview": "assets/skins/berry.jpg" },
+        { "id": "orange",     "name": "暖阳橙",   "color": "#FDA246", "preview": "assets/skins/orange.jpg" },
+        { "id": "ceramic",    "name": "陶瓷青灰", "color": "#4B6A78", "preview": "assets/skins/ceramic.jpg" },
+        { "id": "oceanstale", "name": "深海青",   "color": "#2B6781", "preview": null }
+      ],
+      "command": "python tools/convert.py 简历.docx --name myresume --template online-cv --skin blue"
+    }
+  ],
+  "planned": [
+    {
+      "id": "PanelCV",
+      "source": "jekyller/PanelCV",
+      "note": "卡片式动态 vCard，动效丰富；内容硬编码在 HTML 中，需改造为数据驱动后接入"
+    },
+    {
+      "id": "cvless",
+      "source": "piazzai/cvless",
+      "note": "学术极简风 + 博客，打印自适应；Markdown 驱动，适合科研场景，规划中"
+    }
+  ]
+}

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>简历海 resume-sea — 把简历变成网址</title>
+  <meta name="description" content="简历海：PDF/Word 简历一键转换为统一格式，多模板选择，发布为独立网址的个人简历平台。">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- ============ 导航 ============ -->
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="index.html">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 22c4-6 8-6 12 0s8 6 12 0" stroke="#088395" stroke-width="3" stroke-linecap="round"/>
+          <path d="M2 14c4-6 8-6 12 0s8 6 12 0" stroke="#42A8C0" stroke-width="3" stroke-linecap="round" opacity=".6"/>
+          <circle cx="23" cy="7" r="3" fill="#FDA246"/>
+        </svg>
+        简历海 <small>resume-sea</small>
+      </a>
+      <div class="nav-links">
+        <a href="index.html">首页</a>
+        <a href="template/">模板库</a>
+        <a href="#resumes">已发布</a>
+        <a href="#how">使用指南</a>
+        <a class="btn-nav" href="https://github.com/mycat323/resume-sea" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============ Hero ============ -->
+  <header class="hero">
+    <div class="wrap">
+      <span class="hero-badge">统一的简历发布平台</span>
+      <h1>把简历变成网址，<br>只需要<em>一条命令</em>。</h1>
+      <p>
+        PDF / Word 简历一键转换为统一数据格式，挑选喜欢的模板皮肤，
+        发布即得独立网址。无需服务器、无需数据库，GitHub Pages 免费托管。
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#how">开始转换</a>
+        <a class="btn btn-ghost" href="template/">浏览模板库</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ 统计 ============ -->
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><b id="stat-resumes">–</b><span>份简历已发布</span></div>
+      <div class="stat"><b id="stat-templates">–</b><span>套模板皮肤可选</span></div>
+      <div class="stat"><b>3</b><span>步完成：转换 → 选模板 → 发布</span></div>
+    </div>
+  </div>
+
+  <!-- ============ 三步流程 ============ -->
+  <section id="how">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>三步发布你的简历</h2>
+        <p>本地运行转换工具，生成静态站点，推送到 GitHub 即上线</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>转换简历</h3>
+          <p>支持 PDF / Word（.docx）简历，自动解析为统一数据格式（RSUF），可人工校对。</p>
+          <code>python tools/convert.py 简历.docx --name myresume</code>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>选择模板</h3>
+          <p>内置 Orbit 经典侧栏模板，8 种配色皮肤一键切换；模板库持续扩充。</p>
+          <code>--template online-cv --skin blue</code>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>推送发布</h3>
+          <p>提交推送到 GitHub，GitHub Pages 自动上线，立刻获得独立网址。</p>
+          <code>git push  →  mycat323.github.io/resume-sea/myresume</code>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 已发布简历 ============ -->
+  <section id="resumes">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>已发布简历</h2>
+        <p>每一份简历都是一个独立的静态站点，拥有自己的网址</p>
+      </div>
+      <div class="resume-grid" id="resume-grid">
+        <div class="empty-tip">正在加载注册表…</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 特性 ============ -->
+  <section id="features">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>为什么是简历海</h2>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">格</div>
+          <h3>统一数据格式</h3>
+          <p>任何来源的简历都规范化为 RSUF JSON：基本信息、教育、工作、项目、技能、证书全字段化，模板之间自由切换。</p>
+        </div>
+        <div class="step">
+          <div class="step-num">板</div>
+          <h3>多模板适配层</h3>
+          <p>新增模板只需写一个适配器，把统一格式映射到模板数据结构，历史简历无需重新解析。</p>
+        </div>
+        <div class="step">
+          <div class="step-num">零</div>
+          <h3>零成本托管</h3>
+          <p>纯静态输出，GitHub Pages 免费托管；打印页与 PDF 导出开箱即用，线上投递、纸质投递一份内容通吃。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 页脚 ============ -->
+  <footer class="site">
+    <div class="wrap">
+      <span>简历海 resume-sea · 让简历发布像海浪一样简单</span>
+      <span>简历模板基于 <a href="https://github.com/sharu725/online-cv" target="_blank" rel="noopener">online-cv (Orbit)</a> · 主题设计 <a href="http://themes.3rdwavemedia.com" target="_blank" rel="noopener">3rd Wave Media</a></span>
+    </div>
+  </footer>
+
+  <script>
+    // 相对路径发布地址：本地与 GitHub Pages 下均可正确解析
+    function resumeUrl(id) { return "./" + id + "/"; }
+    function printUrl(id) { return "./" + id + "/print/"; }
+
+    fetch("resumes/registry.json")
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+      .then(function (reg) {
+        var resumes = (reg && reg.resumes) || [];
+        document.getElementById("stat-resumes").textContent = resumes.length;
+
+        var grid = document.getElementById("resume-grid");
+        if (!resumes.length) {
+          grid.innerHTML = '<div class="empty-tip">还没有发布任何简历，运行 convert.py 发布第一份吧</div>';
+          return;
+        }
+        grid.innerHTML = resumes.map(function (r) {
+          var name = (r.title || r.id).replace("的简历", "");
+          return (
+            '<article class="resume-card">' +
+              '<div class="banner"><div class="avatar">' + (name || "简").charAt(0) + "</div></div>" +
+              '<div class="body">' +
+                "<h3>" + (r.title || r.id) + "</h3>" +
+                '<div class="meta">' + r.published_at + " 发布 · 模板 " + r.template + " · 皮肤 " + r.skin + "</div>" +
+                '<div class="tags">' +
+                  '<span class="tag">置信度 ' + Math.round((r.confidence || 0) * 100) + "%</span>" +
+                  (r.source ? '<span class="tag">来源 ' + r.source + "</span>" : "") +
+                "</div>" +
+              "</div>" +
+              '<div class="foot">' +
+                '<a class="btn btn-open" href="' + resumeUrl(r.id) + '">在线查看</a>' +
+                '<a class="btn btn-print" href="' + printUrl(r.id) + '">打印版</a>' +
+              "</div>" +
+            "</article>"
+          );
+        }).join("");
+      })
+      .catch(function () {
+        document.getElementById("resume-grid").innerHTML =
+          '<div class="empty-tip">注册表加载失败（本地预览请通过 HTTP 服务访问，不要直接打开文件）</div>';
+      });
+
+    // 模板统计
+    fetch("template/templates.json")
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+      .then(function (tpl) {
+        var total = 0;
+        (tpl.templates || []).forEach(function (t) { total += (t.skins || []).length; });
+        document.getElementById("stat-templates").textContent = total;
+      })
+      .catch(function () {
+        document.getElementById("stat-templates").textContent = "8";
+      });
+  </script>
+</body>
+</html>

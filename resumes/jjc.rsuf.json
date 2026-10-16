@@ -1,0 +1,119 @@
+{
+  "schema_version": "1.0",
+  "basic": {
+    "name": "蒋以宸",
+    "summary": "本人具备扎实的经济学理论基础与定量分析能力，能够在复杂数据中提炼洞察并形成逻\n\n辑严谨的商业判断。善于跨学科整合知识，兼具理性思维与敏锐的行业感知力。对待任务认\n\n真负责，注重细节与效率，乐于在团队中承担沟通协调角色。对数据驱动的决策过程充满热\n\n情，期望在实习中快速成长，将分析能力转化为实际商业价值。"
+  },
+  "contacts": {
+    "email": "1241140730@qq.com",
+    "phone": "19357341058"
+  },
+  "education": [
+    {
+      "school": "预计毕业：2027.06",
+      "degree": "学士 · 预计毕业：2027.06 国际经济学 / 理学",
+      "start": null,
+      "end": null,
+      "details": "美国犹他州立大学（大三开始全英文教学） – 北京理工大学合作项目\nGPA ：3.33/4.0\n核心课程：计量经济学、数据科学基础、数据分析、商业管理、金融学、会计学\n荣誉奖励：获评 2025，2026 年春季学期院长荣誉名单"
+    }
+  ],
+  "experience": [],
+  "projects": [
+    {
+      "name": "Tesla 英国市场增长策略研究 个人商业分析项目",
+      "tagline": "项目概述：基于 SMMT、英国交通部等多源公开数据，系统分析 Tesla 在英国新能源汽车",
+      "link": "",
+      "start": null,
+      "end": null,
+      "details": "市场的竞争格局， 围绕 Model 3 / Model Y 核心车型，提出“巩固中高端基本盘 + 下沉\n£30k 以下紧凑型市场”的双轨产品策略，并制定配套的本地化营销、渠道及服务组合方\n案。"
+    },
+    {
+      "name": "核心工作：",
+      "tagline": "÷ 整合注册量、充电基建与消费者偏好数据，识别 Tesla 在通勤成本、环保出行、智能驾",
+      "link": "",
+      "start": null,
+      "end": null,
+      "details": ""
+    },
+    {
+      "name": "驶等维度的优势与渗透瓶颈",
+      "tagline": "÷ 通过 STP 分析将客群划分为高收入科技/金融从业者与中产家庭，分别制定差异化价值",
+      "link": "",
+      "start": null,
+      "end": null,
+      "details": ""
+    },
+    {
+      "name": "主张与传播侧重点",
+      "tagline": "÷ 针对英国右舵、环岛窄路、多雨气候等场景，提出 Autopilot 本地适配优化及试驾/交",
+      "link": "",
+      "start": null,
+      "end": null,
+      "details": ""
+    },
+    {
+      "name": "付流程改进建议",
+      "tagline": "÷ 设计“车辆 + 家充 + 快充 + 租赁”组合销售模型，建议与本地充电商、租赁及车队管理",
+      "link": "",
+      "start": null,
+      "end": null,
+      "details": ""
+    },
+    {
+      "name": "公司建立 B2B 合作",
+      "tagline": "÷ 结合英国高播客与智能音箱渗透率，制定以科技媒体、社交媒体及播客为核心的数字化",
+      "link": "",
+      "start": null,
+      "end": null,
+      "details": "传播方案，突出智能与长期成本优势\n项目成果： 形成涵盖定位、客群、本地化、渠道生态与数字营销五大模块的增长策略报\n告，为 Tesla 英国市场份额提升提供可落地决策框架"
+    },
+    {
+      "name": "校园经历",
+      "tagline": "",
+      "link": "",
+      "start": null,
+      "end": null,
+      "details": ""
+    },
+    {
+      "name": "学生会成员",
+      "tagline": "÷ 参与策划并执行多项校园活动，涵盖前期筹备、现场协调与后期总结全过程。",
+      "link": "",
+      "start": null,
+      "end": null,
+      "details": "÷ 负责部门间及师生之间的沟通联络，保障信息高效传达与任务有序推进。\n÷ 协助活动宣传与物资调配，在团队协作中提升组织协调与应变能力。"
+    },
+    {
+      "name": "证书技能",
+      "tagline": "数据分析工具： Excel（高级数据处理与可视化）、Python（基础数据分析与建模）、",
+      "link": "",
+      "start": null,
+      "end": null,
+      "details": ""
+    },
+    {
+      "name": "SQL（数据查询与整合）",
+      "tagline": "办公软件： Microsoft Office（Word / PowerPoint / Outlook）",
+      "link": "",
+      "start": null,
+      "end": null,
+      "details": "语言能力： 中文（母语），英语（CET-4，雅思 6.0 ，具备商务读写与沟通能力）"
+    },
+    {
+      "name": "证书： 大学英语四级考试（CET-4）",
+      "tagline": "",
+      "link": "",
+      "start": null,
+      "end": null,
+      "details": ""
+    }
+  ],
+  "skills": [],
+  "certifications": [],
+  "languages": [],
+  "meta": {
+    "source_file": "蒋以宸简历.pdf",
+    "extracted_at": "2026-10-16T14:00:19",
+    "confidence": 0.6
+  }
+}

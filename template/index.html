@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>模板库 — 简历海 resume-sea</title>
+  <meta name="description" content="简历海模板库：Orbit 经典侧栏模板，8 种配色皮肤，持续扩充。">
+  <link rel="shortcut icon" href="../favicon.ico">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+  <!-- ============ 导航 ============ -->
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="../index.html">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 22c4-6 8-6 12 0s8 6 12 0" stroke="#088395" stroke-width="3" stroke-linecap="round"/>
+          <path d="M2 14c4-6 8-6 12 0s8 6 12 0" stroke="#42A8C0" stroke-width="3" stroke-linecap="round" opacity=".6"/>
+          <circle cx="23" cy="7" r="3" fill="#FDA246"/>
+        </svg>
+        简历海 <small>resume-sea</small>
+      </a>
+      <div class="nav-links">
+        <a href="../index.html">首页</a>
+        <a href="../template/">模板库</a>
+        <a href="../index.html#resumes">已发布</a>
+        <a href="../index.html#how">使用指南</a>
+        <a class="btn-nav" href="https://github.com/mycat323/resume-sea" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </div>
+  </nav>
+
+  <!-- ============ 页头 ============ -->
+  <header class="hero" style="padding:64px 0 110px;">
+    <div class="wrap">
+      <span class="hero-badge">模板库</span>
+      <h1>选一套模板，<br>开始<em>发布简历</em>。</h1>
+      <p>所有模板共享同一份统一数据格式（RSUF），切换模板不需要重新解析简历，只需重新渲染。</p>
+    </div>
+  </header>
+
+  <!-- ============ 模板列表 ============ -->
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>可用模板</h2>
+        <p>点击皮肤色板查看主色，使用命令中的 --skin 参数切换</p>
+      </div>
+      <div class="tpl-grid" id="tpl-grid">
+        <div class="empty-tip">正在加载模板清单…</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 选型说明 ============ -->
+  <section id="decision">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>模板基座选型结论</h2>
+        <p>为什么 resume-sea 选择 online-cv 作为第一个模板</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">✓</div>
+          <h3>sharu725/online-cv —— 已采用</h3>
+          <p>内容全部集中在 <b>_data/data.yml</b> 单一数据源，结构字段化程度最高，与简历解析结果的映射最直接；自带 /print 打印页与前端 PDF 导出；8 种配色皮肤一键切换，天然满足“多模板选择”诉求。</p>
+        </div>
+        <div class="step">
+          <div class="step-num">✗</div>
+          <h3>jekyller/PanelCV —— 暂不采用</h3>
+          <p>卡片式动态 vCard 视觉效果强，但内容硬编码在各 HTML 片段中，非数据驱动，程序化生成需要先做一轮模板改造，成本高。</p>
+        </div>
+        <div class="step">
+          <div class="step-num">✗</div>
+          <h3>piazzai/cvless —— 规划中</h3>
+          <p>学术极简风、打印自适应、支持博客，适合科研场景；但以 Markdown 驱动、面向手工维护，接入需先补充结构化适配器，列入路线图。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 规划 ============ -->
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>路线图</h2>
+      </div>
+      <div class="resume-grid" id="planned-grid">
+        <div class="empty-tip">正在加载…</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 页脚 ============ -->
+  <footer class="site">
+    <div class="wrap">
+      <span>简历海 resume-sea · 让简历发布像海浪一样简单</span>
+      <span>简历模板基于 <a href="https://github.com/sharu725/online-cv" target="_blank" rel="noopener">online-cv (Orbit)</a> · 主题设计 <a href="http://themes.3rdwavemedia.com" target="_blank" rel="noopener">3rd Wave Media</a></span>
+    </div>
+  </footer>
+
+  <script>
+    fetch("templates.json")
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+      .then(function (data) {
+        var grid = document.getElementById("tpl-grid");
+        grid.innerHTML = (data.templates || []).map(function (t) {
+          var firstSkin = (t.skins || [])[0] || {};
+          var preview = firstSkin.preview
+            ? '<img src="' + firstSkin.preview + '" alt="' + t.name + ' 预览">'
+            : '<div class="swatch" style="background:linear-gradient(135deg,' + firstSkin.color + ',#06334a)">' + t.name + "</div>";
+
+          var skins = (t.skins || []).map(function (s, i) {
+            return '<span class="skin-chip' + (i === 0 ? " on" : "") + '" title="--skin ' + s.id + '">' +
+                   '<i style="background:' + s.color + '"></i>' + s.name + "</span>";
+          }).join("");
+
+          var feats = (t.features || []).map(function (f) {
+            return '<span class="feat">' + f + "</span>";
+          }).join("");
+
+          return (
+            '<article class="tpl-card">' +
+              '<div class="tpl-preview">' + preview + "</div>" +
+              '<div class="tpl-body">' +
+                "<h3>" + t.name + ' <span class="src">' + t.source + "</span></h3>" +
+                "<p>" + t.description + "</p>" +
+                '<div class="feat-list">' + feats + "</div>" +
+                '<div class="skin-row">' + skins + "</div>" +
+                '<code class="cmd">' + t.command + "</code>" +
+                '<div class="foot" style="display:flex;gap:10px;margin-top:14px;">' +
+                  '<a class="btn btn-open" style="flex:1;justify-content:center;background:#088395;color:#fff;padding:9px 0;border-radius:8px;font-size:13.5px;" href="../testresume1/">在线预览</a>' +
+                  '<a class="btn btn-print" style="flex:1;justify-content:center;border:1.5px solid #dce8ec;color:#5b6b7a;padding:9px 0;border-radius:8px;font-size:13.5px;" href="../testresume1/print/">打印版</a>' +
+                "</div>" +
+              "</div>" +
+            "</article>"
+          );
+        }).join("");
+
+        // 路线图
+        var planned = document.getElementById("planned-grid");
+        planned.innerHTML = (data.planned || []).map(function (p) {
+          return (
+            '<article class="resume-card">' +
+              '<div class="banner" style="background:linear-gradient(120deg,#5b6b7a,#8fd0dd)"><div class="avatar">' + p.id.charAt(0) + "</div></div>" +
+              '<div class="body"><h3>' + p.id + "</h3>" +
+              '<div class="meta">' + p.source + "</div>" +
+              '<div class="tags"><span class="tag">规划中</span></div>' +
+              "<p style='color:#5b6b7a;font-size:13.5px;margin-top:10px;'>" + p.note + "</p></div>" +
+            "</article>"
+          );
+        }).join("");
+      })
+      .catch(function () {
+        document.getElementById("tpl-grid").innerHTML =
+          '<div class="empty-tip">模板清单加载失败（本地预览请通过 HTTP 服务访问）</div>';
+      });
+  </script>
+</body>
+</html>
