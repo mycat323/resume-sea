@@ -42,6 +42,9 @@ TEMPLATES_DIR = os.path.join(TOOLS_DIR, "templates")
 RESUMES_DIR = os.path.join(REPO_ROOT, "resumes")
 REGISTRY_FILE = os.path.join(RESUMES_DIR, "registry.json")
 BUILD_DIR = os.path.join(TOOLS_DIR, ".build")
+# 已发布简历的统一输出目录：<仓库根>/docs/<name>/
+# 放在 docs/ 下便于 GitHub Pages 直接以该目录或仓库根为源发布。
+PUBLISH_DIR = os.path.join(REPO_ROOT, "docs")
 
 sys.path.insert(0, TOOLS_DIR)
 from parsers import parse_resume            # noqa: E402
@@ -108,7 +111,7 @@ def update_registry(name, template, skin, source, confidence):
         "source": os.path.basename(source) if source else "",
         "confidence": confidence,
         "published_at": __import__("datetime").date.today().isoformat(),
-        "url": f"{base_url}/{name}",
+        "url": f"{base_url}/docs/{name}",
     }
     # title 从 RSUF 读取（调用方传入的 name 之前已落盘）
     rsuf_path = os.path.join(RESUMES_DIR, f"{name}.rsuf.json")
@@ -210,7 +213,7 @@ def main():
               "       或设置 RESUME_SEA_NODE_MODULES 指向依赖所在 node_modules", file=sys.stderr)
         sys.exit(2)
 
-    out_dir = os.path.join(REPO_ROOT, args.name)
+    out_dir = os.path.join(PUBLISH_DIR, args.name)
     env = dict(os.environ)
     env["NODE_PATH"] = node_modules
     cmd = [
@@ -246,11 +249,12 @@ def main():
     entry = update_registry(args.name, args.template, args.skin, args.input, conf)
     print(f"[5/5] 注册表已更新: resumes/registry.json -> {entry['title'] or args.name}")
 
-    print("\n完成！本地预览：")
-    print(f"  cd {out_dir} && python -m http.server 4000")
+    print("\n完成！本地预览（在仓库根目录执行）：")
+    print("  python -m http.server 4000")
+    print(f"  打开 http://localhost:4000/docs/{args.name}/")
     print("发布到 GitHub Pages：")
     print("  git add . && git commit -m \"publish: " + args.name + "\" && git push")
-    print(f"  线上地址: https://mycat323.github.io/resume-sea/{args.name}")
+    print(f"  线上地址: https://mycat323.github.io/resume-sea/docs/{args.name}")
 
 
 if __name__ == "__main__":

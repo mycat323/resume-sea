@@ -135,8 +135,9 @@
 
   <script>
     // 相对路径发布地址：本地与 GitHub Pages 下均可正确解析
-    function resumeUrl(id) { return "./" + id + "/"; }
-    function printUrl(id) { return "./" + id + "/print/"; }
+    // 已发布简历统一放在 docs/<id>/ 下
+    function resumeUrl(id) { return "./docs/" + id + "/"; }
+    function printUrl(id) { return "./docs/" + id + "/print/"; }
 
     fetch("resumes/registry.json")
       .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
