@@ -1,0 +1,62 @@
+name: Deploy static site to GitHub Pages
+
+# 本项目是预构建的纯静态站点，无需在 CI 中重新构建简历，
+# 只需把仓库中已有的静态文件原样发布到 GitHub Pages。
+#
+# 发布内容：平台首页 / 模板库 / docs/<简历>/ 两个静态站点 / 注册表 JSON
+# 不发布 tools/（构建脚本，线上不需要）。
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# 授予 GITHUB_TOKEN 发布 Pages 所需的最小权限
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 同一时间只允许一个发布任务，避免并发写坏站点
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Stage static site
+        run: |
+          set -euo pipefail
+          mkdir -p _site
+          # 只拷贝真正需要对外提供的静态资源
+          for item in index.html favicon.ico .nojekyll assets template docs resumes; do
+            if [ -e "$item" ]; then
+              cp -r "$item" _site/
+            else
+              echo "::warning::$item 不存在，已跳过"
+            fi
+          done
+          echo "--- _site 内容 ---"
+          ls -A _site
+          echo "--- 体积 ---"
+          du -sh _site
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
