@@ -7,3 +7,25 @@ tools/node_modules/
 __pycache__/
 *.pyc
 .DS_Store
+
+# ---- 第三方插件瘦身：运行时不需要，勿随构建产物提交 ----
+# Font Awesome：仅运行时需要 css/all.css + webfonts/ + LICENSE.txt
+assets/plugins/font-awesome/metadata/
+assets/plugins/font-awesome/js/
+assets/plugins/font-awesome/svgs/
+assets/plugins/font-awesome/sprites/
+assets/plugins/font-awesome/less/
+assets/plugins/font-awesome/scss/
+# Bootstrap：页面只引用 css/bootstrap.css + fonts/
+assets/plugins/bootstrap/js/
+assets/plugins/bootstrap/npm.js
+*.map
+# 未被引用的模板预览图（仅 profile.png 运行时使用）
+assets/images/berry.jpg
+assets/images/blue.jpg
+assets/images/ceramic.jpg
+assets/images/desktop.png
+assets/images/green.jpg
+assets/images/mobile.png
+assets/images/orange.jpg
+assets/images/turquoise.jpg
