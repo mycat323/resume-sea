@@ -10,20 +10,20 @@ convert.py — 简历海转换工具（CLI 主编排）
                                                            ▼
                               adapters ──> 模板数据 ──build.js(Node)──> 静态站点
                                                            ▼
-                                    发布到 <平台根>/<name>/ 并更新注册表
+                                    发布到 <平台根>/docs/<name>/ 并更新注册表
 
 用法示例：
-  # 从 Word 简历转换并发布为 testresume1
-  python convert.py ../samples/sample-resume.docx --name testresume1 --skin blue
+  # 从 Word 简历转换并发布为 testresume
+  python convert.py ../sample-cvs/sample-resume.docx --name testresume --skin blue
 
   # 从 PDF 转换
   python convert.py ~/Documents/张三-前端工程师.pdf --name zhangsan
 
   # 编辑过统一 JSON 后重新渲染发布（跳过解析）
-  python convert.py --from-json ../resumes/testresume1.rsuf.json --name testresume1
+  python convert.py --from-json ../resumes/testresume.rsuf.json --name testresume
 
   # 附带头像（建议 100x100 以上正方形）
-  python convert.py resume.docx --name testresume1 --avatar photo.jpg
+  python convert.py resume.docx --name testresume --avatar photo.jpg
 
   # 查看可用模板
   python convert.py --list-templates
@@ -136,7 +136,7 @@ def main():
         epilog=__doc__,
     )
     ap.add_argument("input", nargs="?", help="简历文件路径（.pdf/.docx/.txt/.md）")
-    ap.add_argument("--name", required=True, help="发布路径名（URL 片段），如 testresume1")
+    ap.add_argument("--name", required=True, help="发布路径名（URL 片段），如 testresume")
     ap.add_argument("--template", default="online-cv", help="模板名（默认 online-cv）")
     ap.add_argument("--skin", default="blue",
                     help="配色皮肤：blue/turquoise/green/berry/orange/ceramic/teal/oceanstale")

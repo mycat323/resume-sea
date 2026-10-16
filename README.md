@@ -9,7 +9,7 @@
 | --- | --- |
 | 平台首页 | https://mycat323.github.io/resume-sea/ |
 | 模板库 | https://mycat323.github.io/resume-sea/template |
-| 已发布简历（示例） | https://mycat323.github.io/resume-sea/docs/testresume1 |
+| 已发布简历（示例） | https://mycat323.github.io/resume-sea/docs/testresume |
 
 ## 模板基座选型结论
 
@@ -38,7 +38,7 @@ RSUF 统一格式 JSON  ──可人工校对──▶  --from-json 重新渲染
 模板数据 JSON
    │  render/build.js   Node 复刻 Jekyll 构建（liquidjs + sass + marked，无需 Ruby）
    ▼
-静态站点 → <name>/（index.html + print/ + assets/）
+静态站点 → docs/<name>/（index.html + print/ + assets/）
    │  convert.py        更新 resumes/registry.json 注册表
    ▼
 git push → GitHub Pages 上线
@@ -61,8 +61,8 @@ cd tools && npm install liquidjs js-yaml sass marked
 ```bash
 cd tools
 
-# 从 Word 简历转换，发布为 testresume1
-python convert.py ../samples/sample-resume.docx --name testresume1 --skin blue
+# 从 Word 简历转换，发布为 testresume
+python convert.py ../sample-cvs/sample-resume.docx --name testresume --skin blue
 
 # 从 PDF 简历转换
 python convert.py ~/Documents/张三-前端工程师.pdf --name zhangsan --skin teal
@@ -71,7 +71,7 @@ python convert.py ~/Documents/张三-前端工程师.pdf --name zhangsan --skin 
 python convert.py resume.docx --name myresume --avatar photo.jpg
 
 # 校对过统一 JSON 后重新渲染（跳过解析）
-python convert.py --from-json ../resumes/testresume1.rsuf.json --name testresume1
+python convert.py --from-json ../resumes/testresume.rsuf.json --name testresume
 
 # 查看可用模板
 python convert.py --list-templates
@@ -84,17 +84,17 @@ python convert.py --list-templates
 cd .. && python -m http.server 4000
 # http://localhost:4000/                  平台首页
 # http://localhost:4000/template/         模板库
-# http://localhost:4000/docs/testresume1/  已发布简历
+# http://localhost:4000/docs/testresume/  已发布简历
 
 # 或只预览某一份简历
-cd docs/testresume1 && python -m http.server 4000
+cd docs/testresume && python -m http.server 4000
 ```
 
 ### 4. 发布上线
 
 ```bash
-git add . && git commit -m "publish: testresume1" && git push
-# GitHub Pages 自动部署 → https://mycat323.github.io/resume-sea/docs/testresume1
+git add . && git commit -m "publish: testresume" && git push
+# GitHub Pages 自动部署 → https://mycat323.github.io/resume-sea/docs/testresume
 ```
 
 > GitHub Pages 设置：仓库 Settings → Pages → Source 选 `main` 分支根目录。
@@ -134,9 +134,9 @@ resume-sea/
 ├── resumes/
 │   ├── registry.json       发布注册表（首页简历列表数据源）
 │   └── *.rsuf.json         每份简历的统一格式中间产物
-├── samples/                示例简历（DOCX + PDF，内容一致）
+├── sample-cvs/             示例简历（DOCX + PDF，位于上级目录）
 ├── docs/                   已发布简历（静态站点，每份一个子目录）
-│   ├── testresume1/
+│   ├── testresume/
 │   └── jjc/
 └── tools/
     ├── convert.py          转换工具 CLI 主编排
