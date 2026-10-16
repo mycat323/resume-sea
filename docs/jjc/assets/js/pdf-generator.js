@@ -1,5 +1,10 @@
 function print() {
-  const printWindow = window.open("/print", "_blank");
+  // 用相对当前页面的地址打开打印页。
+  // 不能写死 "/print"：站点发布在 /<repo>/docs/<name>/ 子路径下，
+  // 绝对路径会解析到域名根而 404。
+  const printURL = new URL("print", window.location.href).href;
+  const printWindow = window.open(printURL, "_blank");
+  if (!printWindow) return; // 被浏览器拦截弹窗时不报错
   printWindow.onload = function () {
     printWindow.print();
     // Close the print window after a delay
@@ -8,6 +13,10 @@ function print() {
 }
 
 function generatePDF() {
+  if (typeof html2pdf === "undefined") {
+    alert("PDF 组件尚未加载完成，请稍后再试");
+    return;
+  }
   // Get the print layout URL
   const printURL = new URL("print", window.location.href).href;
 
